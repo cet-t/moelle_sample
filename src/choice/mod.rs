@@ -5,6 +5,7 @@ mod test;
 
 pub trait Choice: trng::Rng {
     fn choice<'a, T>(&mut self, items: &'a [T]) -> Option<&'a T>;
+    fn choice_mut<'a, T>(&mut self, items: &'a mut [T]) -> Option<&'a mut T>;
 }
 
 impl<R> Choice for R
@@ -19,6 +20,16 @@ where
             let max = (items.len() - 1).try_into().ok()?;
             let i: usize = self.randi(0u8.into(), max).try_into().ok()?;
             Some(&items[i])
+        }
+    }
+
+    fn choice_mut<'a, T>(&mut self, items: &'a mut [T]) -> Option<&'a mut T> {
+        if items.is_empty() {
+            None
+        } else {
+            let max = (items.len() - 1).try_into().ok()?;
+            let i: usize = self.randi(0u8.into(), max).try_into().ok()?;
+            Some(&mut items[i])
         }
     }
 }
