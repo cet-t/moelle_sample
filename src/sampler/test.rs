@@ -1,7 +1,7 @@
 macro_rules! sampler_tests {
     ($module:ident, $rng:ident, $word:ty, $float:ty, $alias_expected:expr, $bst_expected:expr) => {
         mod $module {
-            use trng_a::$rng;
+            use fil_a::$rng;
 
             use crate::{Alias, Bst, Sampler};
 
@@ -72,7 +72,7 @@ macro_rules! sampler_tests {
             // Return a chosen point within the range so the selected interval is deterministic.
             struct FractionRng($float);
 
-            impl trng::Rng for FractionRng {
+            impl fil::Rng for FractionRng {
                 type Word = $word;
 
                 fn nextu(&mut self) -> $word {

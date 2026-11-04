@@ -3,6 +3,33 @@
 version = 4
 
 [[package]]
+name = "fil"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9da2f268d19828d66aa83aae822520cc9e5a3c4f15d8e08b531e45303d2e7f9c"
+dependencies = [
+ "pastey",
+]
+
+[[package]]
+name = "fil_a"
+version = "0.1.0"
+source = "git+https://github.com/cet-t/fil_a#b5695c90fcc39a9140e81ce7aea7c616d896aeb4"
+dependencies = [
+ "fil",
+ "splitmix",
+]
+
+[[package]]
+name = "fil_sample"
+version = "0.1.0"
+dependencies = [
+ "fil",
+ "fil_a",
+ "thiserror",
+]
+
+[[package]]
 name = "pastey"
 version = "0.2.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -25,6 +52,12 @@ checksum = "1fbf4db142a473a8d80c26bbf18454ed458bf8d26c8219c331daecfdbd079001"
 dependencies = [
  "proc-macro2",
 ]
+
+[[package]]
+name = "splitmix"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "dc7ba27491fac728a29f190e6319e60039d81c8fa6979de06e5da93c7e34bc0f"
 
 [[package]]
 name = "syn"
@@ -55,32 +88,6 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn",
-]
-
-[[package]]
-name = "trng"
-version = "0.1.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fca8f0c2f56bb6335593ba57214fa8d6c6c7c647a0edc9e8f91a30e0d7f744da"
-dependencies = [
- "pastey",
-]
-
-[[package]]
-name = "trng_a"
-version = "0.1.0"
-source = "git+https://github.com/cet-t/trng_a#f8381661310b59a4257d317d1bc703c608d0fa63"
-dependencies = [
- "trng",
-]
-
-[[package]]
-name = "trng_sample"
-version = "0.1.0"
-dependencies = [
- "thiserror",
- "trng",
- "trng_a",
 ]
 
 [[package]]

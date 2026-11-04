@@ -8,7 +8,7 @@ macro_rules! choice_tests {
                 draws: usize,
             }
 
-            impl trng::Rng for FixedRng {
+            impl fil::Rng for FixedRng {
                 type Word = $word;
 
                 fn nextu(&mut self) -> $word {
@@ -39,7 +39,7 @@ macro_rules! choice_tests {
                 for (word, expected) in [(0, 0), (1 << ($bits - 1), 1), (<$word>::MAX, 2)] {
                     let mut rng = FixedRng { word, draws: 0 };
                     let selected = rng.choice(&items).unwrap();
-                    assert!(std::ptr::eq(selected, &items[expected]));
+                    assert!(core::ptr::eq(selected, &items[expected]));
                     assert_eq!(rng.draws, 1);
                 }
             }

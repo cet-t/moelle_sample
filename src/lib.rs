@@ -1,3 +1,7 @@
+#![no_std]
+
+extern crate alloc;
+
 mod internal;
 pub(crate) use internal::*;
 
@@ -9,4 +13,4 @@ pub use crate::choice::Choice;
 #[cfg(feature = "sampler")]
 mod sampler;
 #[cfg(feature = "sampler")]
-pub use crate::sampler::{Alias, Bst, Sampler, SamplerError, SamplerResult};
+pub use crate::sampler::{Alias, Bst, Sampler, SamplerResult};

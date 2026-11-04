@@ -1,9 +1,9 @@
-use trng::{Rng, Word};
+use fil::{Rng, Word};
 
 #[cfg(test)]
 mod test;
 
-pub trait Choice: trng::Rng {
+pub trait Choice: fil::Rng {
     fn choice<'a, T>(&mut self, items: &'a [T]) -> Option<&'a T>;
     fn choice_mut<'a, T>(&mut self, items: &'a mut [T]) -> Option<&'a mut T>;
 }

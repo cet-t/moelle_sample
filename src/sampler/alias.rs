@@ -1,10 +1,13 @@
-use std::ops::{AddAssign, Div, Mul, Sub, SubAssign};
+use core::ops::{AddAssign, Div, Mul, Sub, SubAssign};
+
+use alloc::vec;
+use alloc::vec::Vec;
 
 use crate::{Float, Int, sampler::Sampler};
 
 pub struct Alias<'a, R>
 where
-    R: trng::Rng,
+    R: fil::Rng,
 {
     rng: &'a mut R,
     weights: &'a [crate::Float<R::Word>],
@@ -15,7 +18,7 @@ where
 
 impl<'a, R> Alias<'a, R>
 where
-    R: trng::Rng,
+    R: fil::Rng,
 {
     pub fn new(rng: &'a mut R, weights: &'a [crate::Float<R::Word>]) -> Self {
         Self {
@@ -29,7 +32,7 @@ where
 
 impl<'a, R> Sampler for Alias<'a, R>
 where
-    R: trng::Rng,
+    R: fil::Rng,
     crate::Int<R::Word>: Default + TryFrom<usize> + TryInto<usize>,
     Float<R::Word>: Default
         + Sub<Output = Float<R::Word>>
