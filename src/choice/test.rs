@@ -8,10 +8,10 @@ macro_rules! choice_tests {
                 draws: usize,
             }
 
-            impl fil::Rng for FixedRng {
+            impl moelle::Rng for FixedRng {
                 type Word = $word;
 
-                fn nextu(&mut self) -> $word {
+                fn next(&mut self) -> $word {
                     self.draws += 1;
                     self.word
                 }

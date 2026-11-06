@@ -6,7 +6,7 @@ use crate::sampler::Sampler;
 
 pub struct Bst<'a, R>
 where
-    R: fil::Rng,
+    R: moelle::Rng,
 {
     rng: &'a mut R,
     acc_weights: Vec<crate::Float<R::Word>>,
@@ -14,7 +14,7 @@ where
 
 impl<'a, R> Bst<'a, R>
 where
-    R: fil::Rng,
+    R: moelle::Rng,
     crate::Float<R::Word>: Default + AddAssign<crate::Float<R::Word>> + PartialOrd,
 {
     pub fn new(rng: &'a mut R, weights: &'a [crate::internal::Float<R::Word>]) -> Self {
@@ -36,7 +36,7 @@ where
 
 impl<'a, R> Sampler for Bst<'a, R>
 where
-    R: fil::Rng,
+    R: moelle::Rng,
     crate::Float<R::Word>: Default + AddAssign<crate::Float<R::Word>> + PartialOrd,
 {
     fn build(&mut self) -> crate::SamplerResult<()> {

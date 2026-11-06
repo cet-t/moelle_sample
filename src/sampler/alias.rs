@@ -7,7 +7,7 @@ use crate::{Float, Int, sampler::Sampler};
 
 pub struct Alias<'a, R>
 where
-    R: fil::Rng,
+    R: moelle::Rng,
 {
     rng: &'a mut R,
     weights: &'a [crate::Float<R::Word>],
@@ -18,7 +18,7 @@ where
 
 impl<'a, R> Alias<'a, R>
 where
-    R: fil::Rng,
+    R: moelle::Rng,
 {
     pub fn new(rng: &'a mut R, weights: &'a [crate::Float<R::Word>]) -> Self {
         Self {
@@ -32,7 +32,7 @@ where
 
 impl<'a, R> Sampler for Alias<'a, R>
 where
-    R: fil::Rng,
+    R: moelle::Rng,
     crate::Int<R::Word>: Default + TryFrom<usize> + TryInto<usize>,
     Float<R::Word>: Default
         + Sub<Output = Float<R::Word>>

@@ -1,9 +1,9 @@
-use fil::{Rng, Word};
+use moelle::{Rng, Word};
 
 #[cfg(test)]
 mod test;
 
-pub trait Choice: fil::Rng {
+pub trait Choice: moelle::Rng {
     fn choice<'a, T>(&mut self, items: &'a [T]) -> Option<&'a T>;
     fn choice_mut<'a, T>(&mut self, items: &'a mut [T]) -> Option<&'a mut T>;
 }

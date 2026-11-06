@@ -3,29 +3,29 @@
 version = 4
 
 [[package]]
-name = "fil"
+name = "moelle"
 version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9da2f268d19828d66aa83aae822520cc9e5a3c4f15d8e08b531e45303d2e7f9c"
+checksum = "ca351a2a6e4eb1eacbadc43860fb89352d8b7bbe5647dd3b6e449d9c84d49f01"
 dependencies = [
  "pastey",
 ]
 
 [[package]]
-name = "fil_a"
+name = "moelle_a"
 version = "0.1.0"
-source = "git+https://github.com/cet-t/fil_a#b5695c90fcc39a9140e81ce7aea7c616d896aeb4"
+source = "git+https://github.com/cet-t/moelle_a#2c87fafc6f2e5ddf908d6b3ea2937bab6149a9cf"
 dependencies = [
- "fil",
+ "moelle",
  "splitmix",
 ]
 
 [[package]]
-name = "fil_sample"
+name = "moelle_sample"
 version = "0.1.0"
 dependencies = [
- "fil",
- "fil_a",
+ "moelle",
+ "moelle_a",
  "thiserror",
 ]
 

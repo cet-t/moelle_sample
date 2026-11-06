@@ -1,2 +1,2 @@
-pub type Int<W> = <W as fil::Word>::Int;
-pub type Float<W> = <W as fil::Word>::Float;
+pub type Int<W> = <W as moelle::Word>::Int;
+pub type Float<W> = <W as moelle::Word>::Float;
