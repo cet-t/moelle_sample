@@ -10,6 +10,7 @@ thiserror = { version = "2", optional = true }
 [features]
 choice = ["dep:moelle"]
 sampler = ["dep:moelle", "dep:thiserror"]
+shuffle = ["dep:moelle"]
 
 [dev-dependencies]
 moelle_a = { git = "https://github.com/cet-t/moelle_a", features = ["sfc"] }

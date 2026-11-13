@@ -10,17 +10,17 @@ where
     R: moelle::Rng,
 {
     rng: &'a mut R,
-    weights: &'a [crate::Float<R::Word>],
+    weights: &'a [crate::Float<R>],
 
-    prob: Option<Vec<crate::Float<R::Word>>>,
-    alias: Option<Vec<usize>>,
+    pub(crate) prob: Option<Vec<crate::Float<R>>>,
+    pub(crate) alias: Option<Vec<usize>>,
 }
 
 impl<'a, R> Alias<'a, R>
 where
     R: moelle::Rng,
 {
-    pub fn new(rng: &'a mut R, weights: &'a [crate::Float<R::Word>]) -> Self {
+    pub const fn new(rng: &'a mut R, weights: &'a [crate::Float<R>]) -> Self {
         Self {
             rng,
             weights,
@@ -33,11 +33,11 @@ where
 impl<'a, R> Sampler for Alias<'a, R>
 where
     R: moelle::Rng,
-    crate::Int<R::Word>: Default + TryFrom<usize> + TryInto<usize>,
-    Float<R::Word>: Default
-        + Sub<Output = Float<R::Word>>
-        + Div<Output = Float<R::Word>>
-        + Mul<Output = Float<R::Word>>
+    crate::Int<R>: Default + TryFrom<usize> + TryInto<usize>,
+    Float<R>: Default
+        + Sub<Output = Float<R>>
+        + Div<Output = Float<R>>
+        + Mul<Output = Float<R>>
         + AddAssign
         + SubAssign
         + From<f32>
@@ -47,25 +47,25 @@ where
         let n = self.weights.len();
 
         let total = {
-            let mut total = Float::<R::Word>::default();
+            let mut total = Float::<R>::default();
             for &w in self.weights.iter() {
                 total += w;
             }
             total
         };
         let scale = {
-            let n = Float::<R::Word>::from(n as f32);
+            let n = Float::<R>::from(n as f32);
             n / total
         };
 
-        let mut prob = vec![Float::<R::Word>::default(); n];
+        let mut prob = vec![Float::<R>::default(); n];
         let mut alias = vec![usize::default(); n];
         let mut small = Vec::with_capacity(n);
         let mut large = Vec::with_capacity(n);
         let mut p: Vec<_> = self.weights.iter().map(|&w| w * scale).collect();
 
         for (i, &pi) in p.iter().enumerate() {
-            if pi < Float::<R::Word>::from(1.0) {
+            if pi < Float::<R>::from(1.0) {
                 small.push(i);
             } else {
                 large.push(i);
@@ -77,8 +77,8 @@ where
             prob[s] = p[s];
             alias[s] = l;
             let ps = p[s];
-            p[l] -= Float::<R::Word>::from(1.0) - ps;
-            if p[l] < Float::<R::Word>::from(1.0) {
+            p[l] -= Float::<R>::from(1.0) - ps;
+            if p[l] < Float::<R>::from(1.0) {
                 large.pop();
                 small.push(l);
             }
@@ -105,10 +105,7 @@ where
         let n = prob.len();
         let i: usize = {
             let max_n = n.checked_sub(1)?.try_into().ok()?;
-            self.rng
-                .randi(Int::<R::Word>::default(), max_n)
-                .try_into()
-                .ok()?
+            self.rng.randi(Int::<R>::default(), max_n).try_into().ok()?
         };
         let u = self.rng.randf(0.0.into(), 1.0.into());
 

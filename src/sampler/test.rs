@@ -1,6 +1,8 @@
 macro_rules! sampler_tests {
     ($module:ident, $rng:ident, $word:ty, $float:ty, $alias_expected:expr, $bst_expected:expr) => {
         mod $module {
+            use alloc::vec;
+
             use moelle_a::$rng;
 
             use crate::{Alias, Bst, Sampler};
